@@ -1,0 +1,11 @@
+# Personal medical info
+*medical*
+*diagnosis*
+*therapy*
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store

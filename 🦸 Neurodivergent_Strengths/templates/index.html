@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 Neuro Command Center</title>
+    <style>
+        @import url('file:///usr/share/fonts/truetype/opendyslexic/OpenDyslexic-Regular.ttf');
+
+        :root {
+            --bg-main: #1a1a2e;
+            --bg-card: #16213e;
+            --accent-blue: #0f4c75;
+            --accent-bright: #3282b8;
+            --text-main: #eeeeee;
+            --text-dim: #bbbbbb;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --playful: #e91e63;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif;
+            background: linear-gradient(135deg, var(--bg-main) 0%, var(--accent-blue) 100%);
+            color: var(--text-main);
+            line-height: 1.8;
+            letter-spacing: 0.02em;
+            word-spacing: 0.16em;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: var(--text-dim);
+        }
+
+        .search-box {
+            margin: 30px auto;
+            max-width: 600px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.3em;
+            font-family: 'OpenDyslexic', sans-serif;
+            background: var(--bg-card);
+            border: 3px solid var(--accent-bright);
+            border-radius: 15px;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--playful);
+            box-shadow: 0 0 20px rgba(233, 30, 99, 0.3);
+            transform: scale(1.02);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px;
+            border: 3px solid var(--accent-blue);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent-bright);
+            box-shadow: 0 10px 30px rgba(50, 130, 184, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .card-icon {
+            font-size: 3em;
+            animation: bounce 2s infinite;
+        }
+
+        .card h2 {
+            font-size: 1.8em;
+            color: var(--accent-bright);
+        }
+
+        .card p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: var(--text-dim);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin-top: 15px;
+            background: var(--accent-bright);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-family: 'OpenDyslexic', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--playful);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .btn-warning {
+            background: var(--warning);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            background: var(--bg-card);
+            border: 3px solid var(--accent-blue);
+            border-radius: 15px;
+            font-size: 1.3em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab:hover, .tab.active {
+            background: var(--accent-bright);
+            border-color: var(--playful);
+            transform: scale(1.05);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .quick-win {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-bright));
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+        }
+
+        .community-badge {
+            display: inline-block;
+            background: var(--playful);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 3px solid var(--accent-blue);
+        }
+
+        footer a {
+            color: var(--accent-bright);
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        footer a:hover {
+            color: var(--playful);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 Neuro Command Center</h1>
+            <p class="subtitle">Built by neurodivergents, for neurodivergents</p>
+            <p class="subtitle">Celebrating lateral thinking, visual minds, and beautiful chaos ✨</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="search" placeholder="🔍 Quick search... (just start typing)" autocomplete="off">
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="showSection('workflows')">⚡ Quick Actions</div>
+            <div class="tab" onclick="showSection('communities')">👥 Communities</div>
+            <div class="tab" onclick="showSection('tools')">🛠️ Tools</div>
+            <div class="tab" onclick="showSection('learning')">📚 Learning</div>
+            <div class="tab" onclick="showSection('quick-wins')">🎯 Quick Wins</div>
+        </div>
+
+        <!-- Workflows Section -->
+        <div id="workflows" class="section active">
+            <div class="grid" id="workflows-grid"></div>
+        </div>
+
+        <!-- Communities Section -->
+        <div id="communities" class="section">
+            <div class="grid" id="communities-grid"></div>
+        </div>
+
+        <!-- Tools Section -->
+        <div id="tools" class="section">
+            <div class="grid" id="tools-grid"></div>
+        </div>
+
+        <!-- Learning Section -->
+        <div id="learning" class="section">
+            <div class="grid" id="learning-grid"></div>
+        </div>
+
+        <!-- Quick Wins Section -->
+        <div id="quick-wins" class="section">
+            <div class="grid" id="quick-wins-grid"></div>
+        </div>
+
+        <footer>
+            <h2>🌟 This is a living, evolving project!</h2>
+            <p style="font-size: 1.2em; margin: 20px 0;">
+                Made with 💜 by the neurodivergent community.<br>
+                Add your own tips, tools, and workflows!
+            </p>
+            <p style="font-size: 1.1em; margin: 15px 0;">
+                <strong>Want to contribute?</strong><br>
+                Edit <code>~/Documents/NeurodivergentPride/resources.json</code><br>
+                Share your version on GitHub and help others! 🚀
+            </p>
+            <p style="margin-top: 20px;">
+                <a href="https://github.com/topics/neurodiversity" target="_blank">🔗 Explore Neurodiversity on GitHub</a> |
+                <a href="https://www.reddit.com/r/ADHD_Programmers/" target="_blank">💬 Join ADHD Programmers</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        let resources = {};
+
+        // Load resources
+        fetch('/api/resources')
+            .then(r => r.json())
+            .then(data => {
+                resources = data;
+                renderAll();
+            });
+
+        function renderAll() {
+            renderWorkflows();
+            renderCommunities();
+            renderTools();
+            renderLearning();
+            renderQuickWins();
+        }
+
+        function renderWorkflows() {
+            const grid = document.getElementById('workflows-grid');
+            grid.innerHTML = resources.workflows?.map(w => `
+                <div class="card" onclick="runWorkflow('${w.script}')">
+                    <div class="card-header">
+                        <span class="card-icon">${w.icon}</span>
+                        <h2>${w.name}</h2>
+                    </div>
+                    <p>${w.description}</p>
+                    <button class="btn btn-success">▶️ Run Now</button>
+                </div>
+            `).join('') || '<p>No workflows yet. Add some in resources.json!</p>';
+        }
+
+        function renderCommunities() {
+            const grid = document.getElementById('communities-grid');
+            grid.innerHTML = resources.communities?.map(c => `
+                <div class="card" onclick="window.open('${c.url}', '_blank')">
+                    <div class="card-header">
+                        <span class="card-icon">${c.icon}</span>
+                        <h2>${c.name}</h2>
+                    </div>
+                    <p>${c.description}</p>
+                    <span class="community-badge">🌐 ${c.type}</span>
+                    <button class="btn">🔗 Visit Community</button>
+                </div>
+            `).join('') || '<p>Loading communities...</p>';
+        }
+
+        function renderTools() {
+            const grid = document.getElementById('tools-grid');
+            grid.innerHTML = resources.tools?.map(t => `
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">${t.icon}</span>
+                        <h2>${t.name}</h2>
+                    </div>
+                    <p>${t.description}</p>
+                    ${t.install ? `<button class="btn btn-warning" onclick="installTool('${t.install}')">📥 Install</button>` : ''}
+                    ${t.url ? `<button class="btn" onclick="window.open('${t.url}', '_blank')">🔗 Learn More</button>` : ''}
+                </div>
+            `).join('') || '<p>Loading tools...</p>';
+        }
+
+        function renderLearning() {
+            const grid = document.getElementById('learning-grid');
+            grid.innerHTML = resources.learning_resources?.map(l => `
+                <div class="card" onclick="window.open('${l.url}', '_blank')">
+                    <div class="card-header">
+                        <span class="card-icon">${l.icon}</span>
+                        <h2>${l.name}</h2>
+                    </div>
+                    <p>${l.description}</p>
+                    <span class="community-badge">📖 ${l.type}</span>
+                    <button class="btn">🎓 Explore</button>
+                </div>
+            `).join('') || '<p>Loading resources...</p>';
+        }
+
+        function renderQuickWins() {
+            const grid = document.getElementById('quick-wins-grid');
+            grid.innerHTML = resources.quick_wins?.map(q => `
+                <div class="quick-win card">
+                    <div class="card-header">
+                        <span class="card-icon">${q.icon}</span>
+                        <h2>${q.title}</h2>
+                    </div>
+                    <p>${q.description}</p>
+                    <button class="btn btn-success" onclick="runCommand('${q.command}')">⚡ Do It Now!</button>
+                </div>
+            `).join('') || '<p>Loading quick wins...</p>';
+        }
+
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function runWorkflow(script) {
+            fetch('/api/run-workflow', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({script: script})
+            })
+            .then(r => r.json())
+            .then(data => alert('✅ ' + data.message));
+        }
+
+        function installTool(command) {
+            if (confirm('Install this tool?\n\n' + command)) {
+                fetch('/api/install-tool', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({command: command})
+                })
+                .then(r => r.json())
+                .then(data => alert(data.message));
+            }
+        }
+
+        function runCommand(command) {
+            fetch('/api/run-command', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({command: command})
+            })
+            .then(r => r.json())
+            .then(data => alert('✅ ' + data.message));
+        }
+
+        // Search functionality - ADHD-friendly instant results!
+        document.getElementById('search').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+
+            if (!query) {
+                renderAll();
+                return;
+            }
+
+            // Search across ALL sections
+            let found = false;
+
+            // Search workflows
+            const filteredWorkflows = resources.workflows?.filter(w =>
+                w.name.toLowerCase().includes(query) ||
+                w.description.toLowerCase().includes(query) ||
+                w.category?.toLowerCase().includes(query)
+            );
+
+            // Search communities
+            const filteredCommunities = resources.communities?.filter(c =>
+                c.name.toLowerCase().includes(query) ||
+                c.description.toLowerCase().includes(query) ||
+                c.type?.toLowerCase().includes(query)
+            );
+
+            // Search tools
+            const filteredTools = resources.tools?.filter(t =>
+                t.name.toLowerCase().includes(query) ||
+                t.description.toLowerCase().includes(query) ||
+                t.type?.toLowerCase().includes(query)
+            );
+
+            // Search learning resources
+            const filteredLearning = resources.learning_resources?.filter(l =>
+                l.name.toLowerCase().includes(query) ||
+                l.description.toLowerCase().includes(query) ||
+                l.type?.toLowerCase().includes(query)
+            );
+
+            // Search quick wins
+            const filteredQuickWins = resources.quick_wins?.filter(q =>
+                q.title.toLowerCase().includes(query) ||
+                q.description.toLowerCase().includes(query)
+            );
+
+            // Render filtered results
+            renderFilteredResults({
+                workflows: filteredWorkflows,
+                communities: filteredCommunities,
+                tools: filteredTools,
+                learning_resources: filteredLearning,
+                quick_wins: filteredQuickWins
+            });
+        });
+
+        function renderFilteredResults(filtered) {
+            // Show all sections with results
+            document.querySelectorAll('.section').forEach(s => s.style.display = 'block');
+
+            // Workflows
+            const workflowsGrid = document.getElementById('workflows-grid');
+            if (filtered.workflows?.length > 0) {
+                workflowsGrid.innerHTML = filtered.workflows.map(w => `
+                    <div class="card" onclick="runWorkflow('${w.script}')">
+                        <div class="card-header">
+                            <span class="card-icon">${w.icon}</span>
+                            <h2>${w.name}</h2>
+                        </div>
+                        <p>${w.description}</p>
+                        <button class="btn btn-success">▶️ Run Now</button>
+                    </div>
+                `).join('');
+            } else {
+                workflowsGrid.innerHTML = '';
+            }
+
+            // Communities
+            const communitiesGrid = document.getElementById('communities-grid');
+            if (filtered.communities?.length > 0) {
+                communitiesGrid.innerHTML = filtered.communities.map(c => `
+                    <div class="card" onclick="window.open('${c.url}', '_blank')">
+                        <div class="card-header">
+                            <span class="card-icon">${c.icon}</span>
+                            <h2>${c.name}</h2>
+                        </div>
+                        <p>${c.description}</p>
+                        <span class="community-badge">🌐 ${c.type}</span>
+                        <button class="btn">🔗 Visit Community</button>
+                    </div>
+                `).join('');
+            } else {
+                communitiesGrid.innerHTML = '';
+            }
+
+            // Tools
+            const toolsGrid = document.getElementById('tools-grid');
+            if (filtered.tools?.length > 0) {
+                toolsGrid.innerHTML = filtered.tools.map(t => `
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-icon">${t.icon}</span>
+                            <h2>${t.name}</h2>
+                        </div>
+                        <p>${t.description}</p>
+                        ${t.install ? `<button class="btn btn-warning" onclick="installTool('${t.install}')">📥 Install</button>` : ''}
+                        ${t.url ? `<button class="btn" onclick="window.open('${t.url}', '_blank')">🔗 Learn More</button>` : ''}
+                    </div>
+                `).join('');
+            } else {
+                toolsGrid.innerHTML = '';
+            }
+
+            // Learning
+            const learningGrid = document.getElementById('learning-grid');
+            if (filtered.learning_resources?.length > 0) {
+                learningGrid.innerHTML = filtered.learning_resources.map(l => `
+                    <div class="card" onclick="window.open('${l.url}', '_blank')">
+                        <div class="card-header">
+                            <span class="card-icon">${l.icon}</span>
+                            <h2>${l.name}</h2>
+                        </div>
+                        <p>${l.description}</p>
+                        <span class="community-badge">📖 ${l.type}</span>
+                        <button class="btn">🎓 Explore</button>
+                    </div>
+                `).join('');
+            } else {
+                learningGrid.innerHTML = '';
+            }
+
+            // Quick Wins
+            const quickWinsGrid = document.getElementById('quick-wins-grid');
+            if (filtered.quick_wins?.length > 0) {
+                quickWinsGrid.innerHTML = filtered.quick_wins.map(q => `
+                    <div class="quick-win card">
+                        <div class="card-header">
+                            <span class="card-icon">${q.icon}</span>
+                            <h2>${q.title}</h2>
+                        </div>
+                        <p>${q.description}</p>
+                        <button class="btn btn-success" onclick="runCommand('${q.command}')">⚡ Do It Now!</button>
+                    </div>
+                `).join('');
+            } else {
+                quickWinsGrid.innerHTML = '';
+            }
+
+            // Show "no results" if nothing found
+            const totalResults = (filtered.workflows?.length || 0) +
+                                (filtered.communities?.length || 0) +
+                                (filtered.tools?.length || 0) +
+                                (filtered.learning_resources?.length || 0) +
+                                (filtered.quick_wins?.length || 0);
+
+            if (totalResults === 0) {
+                document.getElementById('workflows-grid').innerHTML =
+                    '<div style="grid-column: 1/-1; text-align: center; font-size: 1.5em; padding: 50px;">😔 No results found. Try another search!</div>';
+            }
+        }
+
+        // Keyboard shortcuts for ADHD quick navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case '1': showSection('workflows'); break;
+                    case '2': showSection('communities'); break;
+                    case '3': showSection('tools'); break;
+                    case '4': showSection('learning'); break;
+                    case '5': showSection('quick-wins'); break;
+                    case 'k': document.getElementById('search').focus(); break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

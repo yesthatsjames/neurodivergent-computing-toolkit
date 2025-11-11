@@ -1,0 +1,260 @@
+{
+  "communities": [
+    {
+      "name": "ADHD Programmers",
+      "icon": "🧠",
+      "url": "https://www.reddit.com/r/ADHD_Programmers/",
+      "description": "Reddit community for developers with ADHD",
+      "type": "community"
+    },
+    {
+      "name": "ADHD Dopamine Discord",
+      "icon": "⚡",
+      "url": "https://disboard.org/servers/tag/neurodivergent",
+      "description": "50+ ADHD channels, body double voice chats, 18+ section",
+      "type": "community"
+    },
+    {
+      "name": "Cognitive Cosmos Discord",
+      "icon": "🌌",
+      "url": "https://disboard.org/servers/tag/neurodivergent",
+      "description": "Adult community for real connection and creative expression",
+      "type": "community"
+    },
+    {
+      "name": "Orion Discord (Autistic)",
+      "icon": "♾️",
+      "url": "https://disboard.org/servers/tag/neurodivergent",
+      "description": "Safe space for autistic people with special interest channels",
+      "type": "community"
+    },
+    {
+      "name": "Actually Autistic Coders",
+      "icon": "💻",
+      "url": "https://twitter.com/i/communities/1500000000000000000",
+      "description": "Twitter/X community for autistic developers",
+      "type": "community"
+    },
+    {
+      "name": "Dyslexic Advantage",
+      "icon": "📚",
+      "url": "https://www.dyslexicadvantage.org/",
+      "description": "Resources celebrating dyslexic thinking strengths",
+      "type": "resource"
+    },
+    {
+      "name": "DEV Community - Coding with ADHD",
+      "icon": "👨‍💻",
+      "url": "https://dev.to/aidiri/coding-with-adhd-how-do-you-do-it-4h9k",
+      "description": "Developers sharing ADHD coding strategies",
+      "type": "community"
+    }
+  ],
+  "tools": [
+    {
+      "name": "OpenDyslexic Font",
+      "icon": "🔤",
+      "url": "https://opendyslexic.org/",
+      "install": "sudo apt install fonts-opendyslexic",
+      "description": "Font designed for dyslexic readers",
+      "type": "accessibility"
+    },
+    {
+      "name": "Ayoa - Visual Mind Mapping",
+      "icon": "🗺️",
+      "url": "https://www.ayoa.com/",
+      "description": "Neuro-inclusive mind mapping and task management",
+      "type": "productivity"
+    },
+    {
+      "name": "Goblin Tools",
+      "icon": "🧙",
+      "url": "https://goblin.tools/",
+      "description": "Magic To Do, Formalizer, Estimator - simple task tools",
+      "type": "productivity"
+    },
+    {
+      "name": "NeuroDeck AI",
+      "icon": "🤖",
+      "url": "https://neurodeckai.com/",
+      "description": "AI study platform for dyslexia, ADHD, neurodivergent minds",
+      "type": "ai"
+    },
+    {
+      "name": "ClickUp",
+      "icon": "✅",
+      "url": "https://clickup.com/",
+      "description": "1000+ templates to skip setup, customizable workflows",
+      "type": "productivity"
+    },
+    {
+      "name": "Redshift / Blue Light Filter",
+      "icon": "🌅",
+      "install": "sudo apt install redshift-gtk",
+      "description": "Reduces eye strain and helps focus",
+      "type": "accessibility"
+    },
+    {
+      "name": "Pomodoro Timer (GNOME)",
+      "icon": "⏲️",
+      "install": "sudo apt install gnome-shell-pomodoro",
+      "description": "Time-boxing for ADHD focus management",
+      "type": "productivity"
+    },
+    {
+      "name": "Orca Screen Reader",
+      "icon": "🔊",
+      "install": "sudo apt install orca",
+      "description": "Text-to-speech for reducing reading fatigue",
+      "type": "accessibility"
+    },
+    {
+      "name": "Stretchly - Break Reminder",
+      "icon": "🧘",
+      "url": "https://hovancik.net/stretchly/",
+      "description": "Prevents hyperfocus burnout with break reminders",
+      "type": "productivity"
+    },
+    {
+      "name": "Obsidian - Visual Note Taking",
+      "icon": "📝",
+      "url": "https://obsidian.md/",
+      "description": "Graph-based notes for visual/lateral thinkers",
+      "type": "productivity"
+    },
+    {
+      "name": "Excalidraw - Quick Diagrams",
+      "icon": "✏️",
+      "url": "https://excalidraw.com/",
+      "description": "Fast, playful diagram tool for visual thinking",
+      "type": "productivity"
+    },
+    {
+      "name": "Dragon Speech Recognition",
+      "icon": "🎤",
+      "url": "https://www.nuance.com/dragon.html",
+      "description": "Voice-to-text for dyslexia and ADHD flow state",
+      "type": "accessibility"
+    },
+    {
+      "name": "Trello",
+      "icon": "📋",
+      "url": "https://trello.com/",
+      "description": "Visual task boards perfect for ADHD workflow",
+      "type": "productivity"
+    },
+    {
+      "name": "Microsoft To Do",
+      "icon": "☑️",
+      "install": "flatpak install flathub com.github.ranfdev.Notify",
+      "description": "Simple task management with reminders",
+      "type": "productivity"
+    }
+  ],
+  "workflows": [
+    {
+      "name": "System Maintenance",
+      "icon": "🔧",
+      "script": "system_maintenance.sh",
+      "description": "One-click system updates and cleanup",
+      "category": "system"
+    },
+    {
+      "name": "Security Scan",
+      "icon": "🛡️",
+      "script": "security_scan.sh",
+      "description": "Run your security audit scripts",
+      "category": "security"
+    },
+    {
+      "name": "Development Setup",
+      "icon": "⚙️",
+      "script": "dev_setup.sh",
+      "description": "Quick environment setup for coding sessions",
+      "category": "development"
+    },
+    {
+      "name": "Focus Mode",
+      "icon": "🎯",
+      "script": "focus_mode.sh",
+      "description": "Block distractions, start timer, set up workspace",
+      "category": "productivity"
+    }
+  ],
+  "learning_resources": [
+    {
+      "name": "How to ADHD (YouTube)",
+      "icon": "📺",
+      "url": "https://www.youtube.com/@HowtoADHD",
+      "description": "Evidence-based ADHD strategies",
+      "type": "video"
+    },
+    {
+      "name": "British Dyslexia Association",
+      "icon": "📄",
+      "url": "https://www.british-dyslexia.org.uk/",
+      "description": "Comprehensive dyslexia resources and support",
+      "type": "article"
+    },
+    {
+      "name": "Neurodivergent Design Patterns",
+      "icon": "🎨",
+      "url": "https://neurodiversity.design/",
+      "description": "Designing tools that work with your brain",
+      "type": "design"
+    },
+    {
+      "name": "AI Tools for Neurodivergent Users 2025",
+      "icon": "🤖",
+      "url": "https://clickup.com/blog/ai-tools-for-neurodivergent-people/",
+      "description": "Latest AI tools helping neurodivergent professionals",
+      "type": "article"
+    },
+    {
+      "name": "Zapier - Automation & Neurodiversity",
+      "icon": "⚙️",
+      "url": "https://zapier.com/blog/automation-and-neurodiversity/",
+      "description": "How automation accommodates neurodivergent work styles",
+      "type": "article"
+    },
+    {
+      "name": "Microsoft Accessibility Guide",
+      "icon": "🪟",
+      "url": "https://support.microsoft.com/en-us/topic/accessibility-tools-for-neurodiversity-6dbd8065-b543-4cf8-bdfb-7c84d9e8f74a",
+      "description": "Built-in Windows tools for neurodiversity",
+      "type": "guide"
+    }
+  ],
+  "quick_wins": [
+    {
+      "title": "Enable High Contrast",
+      "command": "gsettings set org.gnome.desktop.a11y.interface high-contrast true",
+      "description": "Reduces visual noise",
+      "icon": "🎨"
+    },
+    {
+      "title": "Increase Font Size",
+      "command": "gsettings set org.gnome.desktop.interface text-scaling-factor 1.25",
+      "description": "Easier reading",
+      "icon": "🔍"
+    },
+    {
+      "title": "Enable Focus Mode (Do Not Disturb)",
+      "command": "gsettings set org.gnome.desktop.notifications show-banners false",
+      "description": "Block distracting notifications",
+      "icon": "🔕"
+    },
+    {
+      "title": "Reduce Animations",
+      "command": "gsettings set org.gnome.desktop.interface enable-animations false",
+      "description": "Less visual distraction, faster UI",
+      "icon": "⚡"
+    },
+    {
+      "title": "Increase Cursor Size",
+      "command": "gsettings set org.gnome.desktop.interface cursor-size 32",
+      "description": "Easier to track cursor on screen",
+      "icon": "🖱️"
+    }
+  ]
+}
