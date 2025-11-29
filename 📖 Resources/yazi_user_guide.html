@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📁 Yazi File Manager - Your Visual Guide</title>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #8b5cf6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1f2937;
+            --light: #f3f4f6;
+            --text: #111827;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --bg-code: #f9fafb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: var(--dark);
+            overflow-x: auto;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-tab {
+            flex: 1;
+            min-width: 120px;
+            padding: 1rem 1.5rem;
+            background: var(--dark);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-tab:hover {
+            background: #374151;
+        }
+
+        .nav-tab.active {
+            background: white;
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+            font-size: 2rem;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card {
+            background: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card.success {
+            border-left-color: var(--success);
+            background: #f0fdf4;
+        }
+
+        .card.warning {
+            border-left-color: var(--warning);
+            background: #fffbeb;
+        }
+
+        .card.tip {
+            border-left-color: var(--secondary);
+            background: #faf5ff;
+        }
+
+        .keymap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .keymap-item {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s;
+        }
+
+        .keymap-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .key {
+            display: inline-block;
+            background: var(--dark);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .key.primary {
+            background: var(--primary);
+        }
+
+        .key.success {
+            background: var(--success);
+        }
+
+        .key.danger {
+            background: var(--danger);
+        }
+
+        .key.warning {
+            background: var(--warning);
+        }
+
+        code {
+            background: var(--bg-code);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            border: 1px solid var(--border);
+        }
+
+        pre {
+            background: var(--dark);
+            color: #10b981;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            border: none;
+            padding: 0;
+        }
+
+        .visual-section {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid var(--primary);
+        }
+
+        .workflow-steps {
+            counter-reset: step;
+            margin: 2rem 0;
+        }
+
+        .workflow-step {
+            counter-increment: step;
+            position: relative;
+            padding-left: 4rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-left: 3px solid var(--border);
+        }
+
+        .workflow-step:last-child {
+            border-left-color: transparent;
+        }
+
+        .workflow-step::before {
+            content: counter(step);
+            position: absolute;
+            left: -1.5rem;
+            top: 0;
+            width: 3rem;
+            height: 3rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+        }
+
+        .emoji-large {
+            font-size: 3rem;
+            display: block;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--secondary);
+            box-shadow: 0 8px 16px rgba(139, 92, 246, 0.2);
+            transform: scale(1.05);
+        }
+
+        .feature-card .emoji {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: var(--light);
+        }
+
+        .quick-ref {
+            background: var(--dark);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .quick-ref h3 {
+            color: var(--warning);
+            margin-top: 0;
+        }
+
+        .strengths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .strength-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .strength-card h4 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .strength-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .strength-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .strength-card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--warning);
+            font-weight: bold;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .keymap-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tab {
+                font-size: 0.875rem;
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .nav-tabs {
+                display: none;
+            }
+
+            .tab-content {
+                display: block !important;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📁 Yazi File Manager</h1>
+            <p>Your Visual Guide to Terminal File Management</p>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('quick-start')">🚀 Quick Start</button>
+            <button class="nav-tab" onclick="showTab('navigation')">🧭 Navigation</button>
+            <button class="nav-tab" onclick="showTab('operations')">⚡ Operations</button>
+            <button class="nav-tab" onclick="showTab('visual-tips')">🎨 Visual Tips</button>
+            <button class="nav-tab" onclick="showTab('workflows')">🔄 Workflows</button>
+            <button class="nav-tab" onclick="showTab('reference')">📖 Reference</button>
+        </nav>
+
+        <div class="content">
+            <!-- Quick Start Tab -->
+            <div id="quick-start" class="tab-content active">
+                <h2>🚀 Getting Started with Yazi</h2>
+
+                <div class="card success">
+                    <h3>✅ Installation Complete!</h3>
+                    <p><strong>Version:</strong> Yazi 25.5.31</p>
+                    <p><strong>Location:</strong> <code>/usr/local/bin/yazi</code></p>
+                    <p><strong>Configuration:</strong> <code>~/.config/yazi/</code></p>
+                </div>
+
+                <h3>Launch Yazi</h3>
+                <pre><code># Basic launch
+yazi
+
+# Launch with directory change on exit (recommended)
+yy</code></pre>
+
+                <div class="card tip">
+                    <h3>💡 Pro Tip: Shell Wrapper Function</h3>
+                    <p>Add this to your <code>~/.bashrc</code> or <code>~/.zshrc</code> to enable directory persistence:</p>
+                    <pre><code>function yy() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}</code></pre>
+                    <p>After adding, run: <code>source ~/.bashrc</code> (or <code>~/.zshrc</code>)</p>
+                </div>
+
+                <h3>First Steps</h3>
+                <div class="workflow-steps">
+                    <div class="workflow-step">
+                        <h4>Launch Yazi</h4>
+                        <p>Type <code>yazi</code> in your terminal and press Enter. You'll see a three-panel interface.</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Navigate with Arrow Keys</h4>
+                        <p>Use <span class="key">↑</span> <span class="key">↓</span> to move up/down, <span class="key">←</span> <span class="key">→</span> to go into/out of directories.</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Open Files</h4>
+                        <p>Press <span class="key primary">Enter</span> on any file to open it with the default application.</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Toggle Hidden Files</h4>
+                        <p>Press <span class="key">.</span> (period) to show/hide hidden files (files starting with a dot).</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Get Help</h4>
+                        <p>Press <span class="key">~</span> (tilde) at any time to see all available keybindings.</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Quit Yazi</h4>
+                        <p>Press <span class="key">q</span> to quit and return to your terminal.</p>
+                    </div>
+                </div>
+
+                <div class="visual-section">
+                    <h3>🎯 Understanding the Three-Panel Layout</h3>
+                    <p><strong>This layout is designed for visual thinkers!</strong></p>
+                    <table>
+                        <tr>
+                            <th>Panel</th>
+                            <th>Position</th>
+                            <th>Purpose</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Parent Directory</strong></td>
+                            <td>Left (1/8 width)</td>
+                            <td>Shows where you are in the folder hierarchy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Current Directory</strong></td>
+                            <td>Center (4/8 width)</td>
+                            <td>The main panel where you navigate and select files</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Preview</strong></td>
+                            <td>Right (3/8 width)</td>
+                            <td>Shows file contents or subdirectory contents</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Navigation Tab -->
+            <div id="navigation" class="tab-content">
+                <h2>🧭 Navigation Mastery</h2>
+
+                <div class="card">
+                    <h3>Choose Your Navigation Style</h3>
+                    <p>Yazi supports both <strong>arrow keys</strong> and <strong>Vim-style</strong> keybindings - use whichever feels natural!</p>
+                </div>
+
+                <h3>Basic Movement</h3>
+                <div class="keymap-grid">
+                    <div class="keymap-item">
+                        <span class="key">↑</span> or <span class="key">k</span>
+                        <p>Move cursor up one item</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">↓</span> or <span class="key">j</span>
+                        <p>Move cursor down one item</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">←</span> or <span class="key">h</span>
+                        <p>Go to parent directory</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">→</span> or <span class="key">l</span>
+                        <p>Enter directory / preview file</p>
+                    </div>
+                </div>
+
+                <h3>Jump Navigation</h3>
+                <div class="keymap-grid">
+                    <div class="keymap-item">
+                        <span class="key primary">g</span> <span class="key primary">g</span>
+                        <p>Jump to top of list</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key primary">G</span>
+                        <p>Jump to bottom of list</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">Ctrl</span> + <span class="key">r</span>
+                        <p>Refresh current directory</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">.</span>
+                        <p>Toggle hidden files visibility</p>
+                    </div>
+                </div>
+
+                <h3>Search & Filter</h3>
+                <div class="keymap-grid">
+                    <div class="keymap-item">
+                        <span class="key warning">/</span>
+                        <p>Find files (smart search)</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">n</span>
+                        <p>Next search result</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">N</span>
+                        <p>Previous search result</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key warning">f</span>
+                        <p>Filter files by pattern</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">s</span>
+                        <p>Search with fd (fast find)</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">S</span>
+                        <p>Search with ripgrep (content search)</p>
+                    </div>
+                </div>
+
+                <div class="card tip">
+                    <h3>💡 Visual Navigation Tip</h3>
+                    <p>The <strong>three-panel layout</strong> gives you constant visual context:</p>
+                    <ul>
+                        <li>Always see where you came from (left panel)</li>
+                        <li>Always see where you are (center panel)</li>
+                        <li>Always see what's inside (right panel)</li>
+                    </ul>
+                    <p>This reduces cognitive load - perfect for visual-spatial thinkers!</p>
+                </div>
+            </div>
+
+            <!-- Operations Tab -->
+            <div id="operations" class="tab-content">
+                <h2>⚡ File Operations</h2>
+
+                <h3>Copy, Cut, Paste</h3>
+                <div class="keymap-grid">
+                    <div class="keymap-item">
+                        <span class="key success">y</span>
+                        <p><strong>Yank</strong> - Copy selected files</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key warning">x</span>
+                        <p><strong>Cut</strong> - Move selected files</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key primary">p</span>
+                        <p><strong>Paste</strong> - Insert copied/cut files</p>
+                    </div>
+                </div>
+
+                <div class="card success">
+                    <h3>✓ Visual Feedback</h3>
+                    <p>Yazi shows color-coded markers on copied and cut files:</p>
+                    <ul>
+                        <li><strong style="color: #10b981;">Green marker</strong> = Copied (will duplicate)</li>
+                        <li><strong style="color: #ef4444;">Red marker</strong> = Cut (will move)</li>
+                    </ul>
+                </div>
+
+                <h3>Create & Delete</h3>
+                <div class="keymap-grid">
+                    <div class="keymap-item">
+                        <span class="key success">a</span>
+                        <p><strong>Create</strong> new file or directory</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key warning">d</span>
+                        <p><strong>Delete</strong> (move to trash)</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key danger">D</span>
+                        <p><strong>Delete Permanently</strong> (no recovery!)</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">r</span>
+                        <p><strong>Rename</strong> file or directory</p>
+                    </div>
+                </div>
+
+                <div class="card warning">
+                    <h3>⚠️ Safety First</h3>
+                    <p><strong>Always use <span class="key">d</span> (trash) instead of <span class="key danger">D</span> (permanent delete)</strong></p>
+                    <p>You can recover from trash, but permanent deletion is forever!</p>
+                </div>
+
+                <h3>Selection</h3>
+                <div class="keymap-grid">
+                    <div class="keymap-item">
+                        <span class="key primary">Space</span>
+                        <p>Toggle selection on current item</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">v</span>
+                        <p>Enter visual selection mode</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">V</span>
+                        <p>Exit visual selection mode</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">Ctrl</span> + <span class="key">a</span>
+                        <p>Select all files in current directory</p>
+                    </div>
+                </div>
+
+                <h3>Opening Files</h3>
+                <div class="keymap-grid">
+                    <div class="keymap-item">
+                        <span class="key primary">Enter</span>
+                        <p>Open with default application</p>
+                    </div>
+                    <div class="keymap-item">
+                        <span class="key">o</span>
+                        <p>Open with interactive chooser</p>
+                    </div>
+                </div>
+
+                <div class="visual-section">
+                    <h3>🎨 Color-Coded File Types</h3>
+                    <p>Yazi uses colors to help you identify files at a glance:</p>
+                    <table>
+                        <tr>
+                            <th>Color</th>
+                            <th>File Type</th>
+                            <th>Examples</th>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #3b82f6;">Blue</strong></td>
+                            <td>Directories</td>
+                            <td>Folders you can navigate into</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #8b5cf6;">Magenta</strong></td>
+                            <td>Media files</td>
+                            <td>Images, videos, audio</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #f59e0b;">Yellow</strong></td>
+                            <td>Code & Documents</td>
+                            <td>.py, .js, .pdf files</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #10b981;">Green</strong></td>
+                            <td>Text files</td>
+                            <td>.txt, .md, plain text</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #ef4444;">Red</strong></td>
+                            <td>Archives</td>
+                            <td>.zip, .tar, .gz files</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #06b6d4;">Cyan</strong></td>
+                            <td>Config & Links</td>
+                            <td>.json, .yaml, symlinks</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Visual Tips Tab -->
+            <div id="visual-tips" class="tab-content">
+                <h2>🎨 Visual & Cognitive Strategies</h2>
+
+                <div class="card tip">
+                    <h3>Designed for Visual-Spatial Thinkers</h3>
+                    <p>Yazi's interface leverages your neurodivergent strengths:</p>
+                </div>
+
+                <div class="strengths-grid">
+                    <div class="strength-card">
+                        <h4>🧠 Pattern Recognition</h4>
+                        <ul>
+                            <li>Color-coded file types at a glance</li>
+                            <li>Consistent three-panel layout</li>
+                            <li>Visual markers for operations</li>
+                            <li>Icons and emojis for quick scanning</li>
+                        </ul>
+                    </div>
+
+                    <div class="strength-card">
+                        <h4>🎯 Spatial Navigation</h4>
+                        <ul>
+                            <li>See parent/current/child simultaneously</li>
+                            <li>Mental map of directory structure</li>
+                            <li>Visual preview reduces context switching</li>
+                            <li>No need to remember paths</li>
+                        </ul>
+                    </div>
+
+                    <div class="strength-card">
+                        <h4>⚡ Hyperfocus-Friendly</h4>
+                        <ul>
+                            <li>Keyboard-only navigation (no mouse interruptions)</li>
+                            <li>Minimal visual distractions</li>
+                            <li>Quick operations without breaking flow</li>
+                            <li>Tab support for parallel workflows</li>
+                        </ul>
+                    </div>
+
+                    <div class="strength-card">
+                        <h4>🔄 Reduce Decision Fatigue</h4>
+                        <ul>
+                            <li>Smart defaults for common operations</li>
+                            <li>Visual confirmation before destructive actions</li>
+                            <li>Consistent keybindings across contexts</li>
+                            <li>Muscle memory friendly</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Customization for Your Brain</h3>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="emoji">🎨</span>
+                        <h4>Color Themes</h4>
+                        <p>Edit <code>~/.config/yazi/theme.toml</code> to adjust colors for your visual preferences</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="emoji">⌨️</span>
+                        <h4>Keybindings</h4>
+                        <p>Remap keys in <code>~/.config/yazi/keymap.toml</code> to match your muscle memory</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="emoji">📐</span>
+                        <h4>Panel Ratios</h4>
+                        <p>Adjust panel sizes in <code>yazi.toml</code> for optimal visual balance</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="emoji">🔍</span>
+                        <h4>Preview Settings</h4>
+                        <p>Control what previews show to minimize cognitive load</p>
+                    </div>
+                </div>
+
+                <h3>Workflow Optimization Tips</h3>
+
+                <div class="card">
+                    <h4>📋 Use Tabs for Parallel Tasks</h4>
+                    <p>Press <span class="key">t</span> to create a new tab. Great for comparing directories or working on multiple projects:</p>
+                    <ul>
+                        <li><span class="key">t</span> - New tab in current directory</li>
+                        <li><span class="key">[</span> / <span class="key">]</span> - Switch between tabs</li>
+                        <li><span class="key">1</span>, <span class="key">2</span>, <span class="key">3</span> - Jump to specific tab</li>
+                        <li><span class="key">Ctrl</span> + <span class="key">w</span> - Close current tab</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h4>🔍 Smart Search Strategies</h4>
+                    <p><strong>Three types of search for different needs:</strong></p>
+                    <table>
+                        <tr>
+                            <th>Key</th>
+                            <th>Search Type</th>
+                            <th>Best For</th>
+                        </tr>
+                        <tr>
+                            <td><span class="key">/</span></td>
+                            <td>Inline Find</td>
+                            <td>Quick filename search in current directory</td>
+                        </tr>
+                        <tr>
+                            <td><span class="key">s</span></td>
+                            <td>fd Search</td>
+                            <td>Recursive filename search in subdirectories</td>
+                        </tr>
+                        <tr>
+                            <td><span class="key">S</span></td>
+                            <td>ripgrep Search</td>
+                            <td>Search file contents (finds text inside files)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card tip">
+                    <h4>💡 Automation Tip: Integrate with Your Workspace</h4>
+                    <p>Since you're using the Claude Code Workspace, you can create aliases:</p>
+                    <pre><code># Add to ~/.bashrc or ~/.zshrc
+alias cw='yy "/home/jam1/Documents/03_🤖 AI_CODING_PROJECTS/⚡ Claude_Code_Workspace"'
+alias vid='yy "/home/jam1/Documents/01_🎬 VIDEO_PRODUCTION_ACTIVE"'
+alias sec='yy "/home/jam1/Documents/02_🔒 SECURITY_HACKING_TOOLS"'</code></pre>
+                    <p>Now type <code>cw</code> to jump directly to your Claude workspace in Yazi!</p>
+                </div>
+            </div>
+
+            <!-- Workflows Tab -->
+            <div id="workflows" class="tab-content">
+                <h2>🔄 Common Workflows</h2>
+
+                <h3>Workflow 1: Organizing Project Files</h3>
+                <div class="workflow-steps">
+                    <div class="workflow-step">
+                        <h4>Navigate to Project Directory</h4>
+                        <p>Launch Yazi: <code>yy</code></p>
+                        <p>Use <span class="key">j</span>/<span class="key">k</span> and <span class="key">l</span> to navigate to your project</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Show All Files Including Hidden</h4>
+                        <p>Press <span class="key">.</span> to reveal hidden files like <code>.git</code>, <code>.env</code></p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Create New Folders</h4>
+                        <p>Press <span class="key">a</span>, type folder name ending with <code>/</code></p>
+                        <p>Example: <code>archive/</code> or <code>docs/</code></p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Select Multiple Files</h4>
+                        <p>Use <span class="key">Space</span> to select files you want to move</p>
+                        <p>Or <span class="key">v</span> for visual mode and use <span class="key">j</span>/<span class="key">k</span> to select range</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Move Files</h4>
+                        <p>Press <span class="key">x</span> to cut selected files</p>
+                        <p>Navigate to destination folder with <span class="key">l</span></p>
+                        <p>Press <span class="key">p</span> to paste</p>
+                    </div>
+                </div>
+
+                <h3>Workflow 2: Finding That Lost File</h3>
+                <div class="workflow-steps">
+                    <div class="workflow-step">
+                        <h4>Start in Parent Directory</h4>
+                        <p>Navigate to the highest level where the file might be</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Use fd for Recursive Search</h4>
+                        <p>Press <span class="key">s</span> and type part of the filename</p>
+                        <p>Example: <code>report</code> finds all files with "report" in name</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Or Search File Contents</h4>
+                        <p>Press <span class="key">S</span> (capital S) to search inside files with ripgrep</p>
+                        <p>Example: <code>budget 2025</code> finds files containing that text</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Navigate to Result</h4>
+                        <p>Use <span class="key">j</span>/<span class="key">k</span> to select from results</p>
+                        <p>Press <span class="key">Enter</span> to open the file</p>
+                    </div>
+                </div>
+
+                <h3>Workflow 3: Bulk File Operations</h3>
+                <div class="workflow-steps">
+                    <div class="workflow-step">
+                        <h4>Filter Files by Pattern</h4>
+                        <p>Press <span class="key">f</span> and type pattern: <code>*.jpg</code> or <code>2025*</code></p>
+                        <p>Now you only see matching files</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Select All Visible</h4>
+                        <p>Press <span class="key">Ctrl</span> + <span class="key">a</span> to select all filtered files</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Copy to Another Location</h4>
+                        <p>Press <span class="key">y</span> to yank (copy)</p>
+                        <p>Navigate to destination</p>
+                        <p>Press <span class="key">p</span> to paste all</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Clear Filter</h4>
+                        <p>Press <span class="key">f</span> again and clear the pattern to see all files</p>
+                    </div>
+                </div>
+
+                <h3>Workflow 4: Video Production Workflow</h3>
+                <div class="card">
+                    <p>Since you work with video production, here's a specialized workflow:</p>
+                </div>
+                <div class="workflow-steps">
+                    <div class="workflow-step">
+                        <h4>Navigate to Video Project</h4>
+                        <p><code>yy "/home/jam1/Documents/01_🎬 VIDEO_PRODUCTION_ACTIVE"</code></p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Preview Video Files</h4>
+                        <p>Navigate to video files - the preview panel shows file info</p>
+                        <p>See file size, modified date, and basic metadata</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Organize Raw Footage</h4>
+                        <p>Create folders: <code>raw/</code>, <code>edited/</code>, <code>exports/</code></p>
+                        <p>Use visual selection and cut/paste to organize</p>
+                    </div>
+                    <div class="workflow-step">
+                        <h4>Quick Access with Tabs</h4>
+                        <p>Open raw footage in Tab 1, edited files in Tab 2, exports in Tab 3</p>
+                        <p>Switch quickly with <span class="key">1</span>, <span class="key">2</span>, <span class="key">3</span></p>
+                    </div>
+                </div>
+
+                <div class="quick-ref">
+                    <h3>⚡ Quick Reference: Common Operations</h3>
+                    <table>
+                        <tr>
+                            <th>Task</th>
+                            <th>Keys</th>
+                        </tr>
+                        <tr>
+                            <td>Copy files</td>
+                            <td><span class="key">Space</span> (select) → <span class="key">y</span> (yank) → navigate → <span class="key">p</span> (paste)</td>
+                        </tr>
+                        <tr>
+                            <td>Move files</td>
+                            <td><span class="key">Space</span> (select) → <span class="key">x</span> (cut) → navigate → <span class="key">p</span> (paste)</td>
+                        </tr>
+                        <tr>
+                            <td>Delete files safely</td>
+                            <td><span class="key">Space</span> (select) → <span class="key">d</span> (to trash)</td>
+                        </tr>
+                        <tr>
+                            <td>Rename file</td>
+                            <td>Select file → <span class="key">r</span> → type new name → <span class="key">Enter</span></td>
+                        </tr>
+                        <tr>
+                            <td>Create new folder</td>
+                            <td><span class="key">a</span> → type <code>foldername/</code> → <span class="key">Enter</span></td>
+                        </tr>
+                        <tr>
+                            <td>Find file by name</td>
+                            <td><span class="key">s</span> → type search term → <span class="key">Enter</span></td>
+                        </tr>
+                        <tr>
+                            <td>Search file contents</td>
+                            <td><span class="key">S</span> → type search term → <span class="key">Enter</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Reference Tab -->
+            <div id="reference" class="tab-content">
+                <h2>📖 Complete Keybinding Reference</h2>
+
+                <h3>Navigation</h3>
+                <table>
+                    <tr>
+                        <th>Key</th>
+                        <th>Action</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><span class="key">j</span> or <span class="key">↓</span></td>
+                        <td>Move down</td>
+                        <td>Navigate to next item</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">k</span> or <span class="key">↑</span></td>
+                        <td>Move up</td>
+                        <td>Navigate to previous item</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">l</span> or <span class="key">→</span></td>
+                        <td>Enter / Preview</td>
+                        <td>Enter directory or preview file</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">h</span> or <span class="key">←</span></td>
+                        <td>Leave</td>
+                        <td>Go to parent directory</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">g</span> <span class="key">g</span></td>
+                        <td>Go to top</td>
+                        <td>Jump to first item</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">G</span></td>
+                        <td>Go to bottom</td>
+                        <td>Jump to last item</td>
+                    </tr>
+                </table>
+
+                <h3>File Operations</h3>
+                <table>
+                    <tr>
+                        <th>Key</th>
+                        <th>Action</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><span class="key">Enter</span></td>
+                        <td>Open</td>
+                        <td>Open file with default application</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">o</span></td>
+                        <td>Open interactive</td>
+                        <td>Choose application to open with</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">y</span></td>
+                        <td>Yank (copy)</td>
+                        <td>Copy selected files to clipboard</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">x</span></td>
+                        <td>Cut</td>
+                        <td>Cut selected files for moving</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">p</span></td>
+                        <td>Paste</td>
+                        <td>Paste copied/cut files to current directory</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">d</span></td>
+                        <td>Delete (trash)</td>
+                        <td>Move files to trash (recoverable)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">D</span></td>
+                        <td>Delete permanently</td>
+                        <td>Permanently delete files (cannot be recovered)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">a</span></td>
+                        <td>Create</td>
+                        <td>Create new file or directory</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">r</span></td>
+                        <td>Rename</td>
+                        <td>Rename current file or directory</td>
+                    </tr>
+                </table>
+
+                <h3>Selection</h3>
+                <table>
+                    <tr>
+                        <th>Key</th>
+                        <th>Action</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><span class="key">Space</span></td>
+                        <td>Toggle selection</td>
+                        <td>Select/deselect current item</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">v</span></td>
+                        <td>Visual mode</td>
+                        <td>Enter visual selection mode</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">V</span></td>
+                        <td>Exit visual mode</td>
+                        <td>Exit visual selection mode</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">Ctrl</span> + <span class="key">a</span></td>
+                        <td>Select all</td>
+                        <td>Select all items in current directory</td>
+                    </tr>
+                </table>
+
+                <h3>Search & Filter</h3>
+                <table>
+                    <tr>
+                        <th>Key</th>
+                        <th>Action</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><span class="key">/</span></td>
+                        <td>Find</td>
+                        <td>Search for files in current directory</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">n</span></td>
+                        <td>Next result</td>
+                        <td>Go to next search result</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">N</span></td>
+                        <td>Previous result</td>
+                        <td>Go to previous search result</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">f</span></td>
+                        <td>Filter</td>
+                        <td>Filter files by pattern</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">s</span></td>
+                        <td>Search (fd)</td>
+                        <td>Recursive filename search with fd</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">S</span></td>
+                        <td>Search (ripgrep)</td>
+                        <td>Search file contents with ripgrep</td>
+                    </tr>
+                </table>
+
+                <h3>Tab Management</h3>
+                <table>
+                    <tr>
+                        <th>Key</th>
+                        <th>Action</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><span class="key">t</span></td>
+                        <td>New tab</td>
+                        <td>Create new tab in current directory</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">Ctrl</span> + <span class="key">w</span></td>
+                        <td>Close tab</td>
+                        <td>Close current tab</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">[</span></td>
+                        <td>Previous tab</td>
+                        <td>Switch to previous tab</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">]</span></td>
+                        <td>Next tab</td>
+                        <td>Switch to next tab</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">1</span> / <span class="key">2</span> / <span class="key">3</span></td>
+                        <td>Jump to tab</td>
+                        <td>Jump directly to tab 1, 2, or 3</td>
+                    </tr>
+                </table>
+
+                <h3>View Options</h3>
+                <table>
+                    <tr>
+                        <th>Key</th>
+                        <th>Action</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><span class="key">.</span></td>
+                        <td>Toggle hidden</td>
+                        <td>Show/hide hidden files (files starting with .)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">Ctrl</span> + <span class="key">r</span></td>
+                        <td>Refresh</td>
+                        <td>Refresh current directory view</td>
+                    </tr>
+                </table>
+
+                <h3>System</h3>
+                <table>
+                    <tr>
+                        <th>Key</th>
+                        <th>Action</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><span class="key">~</span></td>
+                        <td>Help</td>
+                        <td>Show help menu with all keybindings</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">q</span></td>
+                        <td>Quit</td>
+                        <td>Exit Yazi (saves current directory if using yy wrapper)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="key">Q</span></td>
+                        <td>Quit without saving</td>
+                        <td>Exit without saving current directory</td>
+                    </tr>
+                </table>
+
+                <h3>Configuration Files</h3>
+                <div class="card">
+                    <p><strong>Your Yazi configuration is stored in:</strong> <code>~/.config/yazi/</code></p>
+                    <table>
+                        <tr>
+                            <th>File</th>
+                            <th>Purpose</th>
+                        </tr>
+                        <tr>
+                            <td><code>yazi.toml</code></td>
+                            <td>Main configuration (panel sizes, sorting, preview settings)</td>
+                        </tr>
+                        <tr>
+                            <td><code>keymap.toml</code></td>
+                            <td>Keybinding customization</td>
+                        </tr>
+                        <tr>
+                            <td><code>theme.toml</code></td>
+                            <td>Color scheme and visual styling</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Resources</h3>
+                <div class="card">
+                    <ul>
+                        <li><strong>Official Documentation:</strong> <a href="https://yazi-rs.github.io/" target="_blank">https://yazi-rs.github.io/</a></li>
+                        <li><strong>GitHub Repository:</strong> <a href="https://github.com/sxyazi/yazi" target="_blank">https://github.com/sxyazi/yazi</a></li>
+                        <li><strong>Configuration Examples:</strong> Check the official docs for themes and plugin examples</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Created for James</strong> | Optimized for Visual-Spatial Thinking & Neurodivergent Strengths</p>
+            <p>Part of the Claude Code Workspace | <code>/home/jam1/Documents/03_🤖 AI_CODING_PROJECTS/⚡ Claude_Code_Workspace/</code></p>
+            <p style="margin-top: 1rem; opacity: 0.8;">💜 Your brain isn't broken - it's differently wired. Yazi leverages your strengths!</p>
+        </footer>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+
+            // Scroll to top of content
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Keyboard shortcuts for tabs
+        document.addEventListener('keydown', (e) => {
+            if (e.altKey) {
+                const tabMap = {
+                    '1': 'quick-start',
+                    '2': 'navigation',
+                    '3': 'operations',
+                    '4': 'visual-tips',
+                    '5': 'workflows',
+                    '6': 'reference'
+                };
+
+                if (tabMap[e.key]) {
+                    e.preventDefault();
+                    const tabIndex = parseInt(e.key) - 1;
+                    const tabs = document.querySelectorAll('.nav-tab');
+                    tabs[tabIndex].click();
+                }
+            }
+        });
+
+        // Add visual feedback for key presses in the guide
+        document.querySelectorAll('.key').forEach(key => {
+            key.addEventListener('click', function() {
+                this.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
