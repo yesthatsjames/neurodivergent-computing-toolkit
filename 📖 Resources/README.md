@@ -20,7 +20,9 @@ This folder contains deep-dive guides for tools that work exceptionally well wit
 
 ### File Management
 
-#### 📁 Yazi - Terminal File Manager
+#### 📁 [Yazi - Terminal File Manager](./Yazi/)
+**Location:** `Yazi/`
+
 **Files:**
 - `YAZI_NEURODIVERGENT_GUIDE.md` - Complete neurodivergent-focused guide
 - `yazi_user_guide.html` - Visual, interactive reference (open in browser)
@@ -37,7 +39,46 @@ This folder contains deep-dive guides for tools that work exceptionally well wit
 - Executive function differences
 - Anyone who struggles with traditional file browsing
 
-**Quick start:** See `YAZI_NEURODIVERGENT_GUIDE.md`
+**Quick start:** See `Yazi/YAZI_NEURODIVERGENT_GUIDE.md`
+
+---
+
+### Programming & Learning
+
+#### 🐍 [Python Learning Suite](./Python_Learning/)
+**Location:** `Python_Learning/`
+
+**Files:**
+- `README.md` - Master index for all Python resources
+- `PYTHON_LEARNING_SUMMARY.md` - Quick overview (start here!)
+- `python_appetite_neurodivergent.md` - Main tutorial reimagined
+- `python_visual_quickstart.md` - Visual syntax reference
+- `python_repl_cheatsheet.md` - Quick reference for active coding
+- `python_first_project_template.md` - Guided first project (file organizer)
+- `setup_python_learning.sh` - Automated setup script
+
+**Why Python (Neurodivergent-Optimized)?**
+- ✅ Visual-spatial code structure (indentation shows hierarchy)
+- ✅ REPL for instant feedback (ADHD hyperfocus support)
+- ✅ Readable syntax (pattern recognition over memorization)
+- ✅ Hands-on learning emphasis (do while learning)
+- ✅ Multiple learning paths (ADHD/Dyslexia/Autism-optimized)
+
+**Key Features:**
+- Decision trees & flowcharts (not text walls)
+- "Try This Now" hands-on sections
+- Executive function support (task breakdown, checklists)
+- Strengths-based approach (your advantages highlighted)
+- External memory support (comprehensive references)
+- Non-linear learning paths (skip/explore freely)
+
+**Best for:**
+- ADHD: Rapid prototyping, instant feedback via REPL
+- Dyslexia: Visual code structure, big-picture thinking
+- Autism: Systematic patterns, deep focus rewards
+- All: Hands-on experimentation, practical projects
+
+**Quick start:** See `Python_Learning/PYTHON_LEARNING_SUMMARY.md`
 
 ---
 
@@ -237,8 +278,9 @@ The goal is helping neurodivergent folks find tools that work — not credit.
 ## 🎯 Quick Navigation
 
 ### Current Resources
-- [Yazi File Manager Guide](./YAZI_NEURODIVERGENT_GUIDE.md)
-- [Yazi Visual Reference](./yazi_user_guide.html) (open in browser)
+- [Yazi File Manager Guide](./Yazi/YAZI_NEURODIVERGENT_GUIDE.md)
+- [Yazi Visual Reference](./Yazi/yazi_user_guide.html) (open in browser)
+- [Python Learning Suite](./Python_Learning/PYTHON_LEARNING_SUMMARY.md) ⭐ NEW!
 
 ### Coming Soon
 - Terminal multiplexers (tmux/zellij) for ADHD
