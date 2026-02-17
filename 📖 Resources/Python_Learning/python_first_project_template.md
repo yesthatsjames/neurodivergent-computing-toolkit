@@ -348,7 +348,7 @@ if __name__ == "__main__":
 ### Step 1: Edit Configuration
 ```python
 # Line 12 - Change this to YOUR downloads folder:
-SOURCE_FOLDER = '/home/jam1/Downloads'  # ← Your actual path
+SOURCE_FOLDER = '/home/yourusername/Downloads'  # ← Your actual path
 ```
 
 ### Step 2: Save the File

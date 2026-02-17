@@ -259,7 +259,6 @@ Sources: Neurodiversity research 2020-2024
 
 **Contact:**
 - GitHub: [@yesthatsjames](https://github.com/yesthatsjames)
-- Email: yesthatsjames@gmail.com
 
 ---
 

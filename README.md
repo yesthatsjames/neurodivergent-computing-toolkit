@@ -35,8 +35,9 @@ These aren't "workarounds" - they're optimizations for neurodivergent cognition 
 - Automation for maintenance tasks
 - Low-friction workflows
 
-## 🚀 Resources
+## 🚀 What's Inside
 
+- 🖥️ **Terminal Setup** - Dyslexia-friendly Kitty rice + bash enhancements ([one-command install](🖥️%20Terminal_Setup/README.md))
 - 💼 **Workplace Accommodations** - Templates and strategies
 - 🎨 **Coping Strategies** - Practical frameworks
 - 🦸 **Neurodivergent Strengths** - Reframing "disabilities" as capabilities
@@ -52,7 +53,6 @@ Share your accommodations! Built from lived experience.
 
 **Contact:**
 - GitHub: [@yesthatsjames](https://github.com/yesthatsjames)
-- Email: yesthatsjames@gmail.com
 
 ## 📜 License
 
